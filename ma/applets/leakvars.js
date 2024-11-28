@@ -1,7 +1,10 @@
-let appObj = window.applet.getAppletObject();
-let obj = {};
-let keys = appObj.getAllObjectNames();
-keys.forEach(name => obj[name] = appObj.getValue(name));
+appObj = window.appObj;
+keys = appObj.getAllObjectNames();
+values = keys.map((key, i) => ({
+	index: i,
+	name: key,
+	value: appObj.getValueString(key),
+	def: appObj.getDefinitionString(key)
+}));
 
-let text = JSON.stringify(obj, null, 4);
-window.appletCont.innerText = text;
+window.godLog.innerText = JSON.stringify(values, null, 4);
